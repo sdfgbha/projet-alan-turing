@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Machine Enigma d'Alan Turing</title>
+    <style>
+        /* Ajoutez vos styles CSS ici */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            transition: background-color 0.3s;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        section {
+            padding: 20px;
+            display: none;
+            transition: opacity 0.5s, transform 0.5s;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        section.active {
+            display: block;
+        }
+        h2 {
+            color: #333;
+            transition: color 0.3s;
+        }
+        p {
+            color: #555;
+            line-height: 1.6;
+            transition: color 0.3s;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        button:hover, button:focus {
+            background-color: #0056b3;
+        }
+        h2:hover, p:hover {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        img:hover {
+            transform: scale(1.05);
+        }
+        .quiz-container {
+            text-align: center;
+        }
+        .quiz-container form {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>La Machine Enigma d'Alan Turing</h1>
+    </header>
+    <section id="introduction" class="active">
+        <h2>Introduction</h2>
+        <img src="https://lejournal.cnrs.fr/sites/default/files/styles/visuel_principal/public/assets/images/2-s45-g1-1939_fr_72dpi_recadree.jpg?itok=X9cQ0bGa" alt="Machine Enigma"style="max-width: 400px; height: auto;">
+        <p>La machine Enigma est un dispositif de chiffrement mécanique utilisé par les forces armées allemandes pendant la <a href="https://fr.wikipedia.org/wiki/Seconde_Guerre_mondiale">Seconde Guerre mondiale</a> pour sécuriser les communications. Elle a été utilisée pour coder et décoder des messages confidentiels.</p>
+        <button id="btnNext1">Suivant</button>
+    </section>
+    <section id="fonctionnement">
+        <h2>Fonctionnement de la Machine Enigma</h2>
+        <img src="https://www.apprendre-en-ligne.net/crypto/Enigma/principe_fr.jpg" alt="Fonctionnement de la Machine Enigma"style="max-width: 400px; height: auto;">
+        <p>La machine Enigma fonctionnait en utilisant une série de rotors et un clavier. Lorsqu'une lettre était tapée sur le clavier, une autre lettre s'allumait sur une lampe à l'extérieur de la machine, permettant ainsi de coder le message. Le réglage des rotors changeait chaque jour.</p>
+        <button id="btnPrev2">Précédent</button>
+        <button id="btnNext2">Suivant</button>
+    </section>
+    <section id="defi">
+        <h2>Le Défi du Décryptage</h2>
+        <img src="data:image/jpeg;base64,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" alt="Le Défi du Décryptage"max-width: 400px; height: auto;">
+        <p>Le décryptage des messages Enigma était un défi majeur pour les Alliés. Alan Turing a dirigé une équipe à Bletchley Park pour développer une machine de décryptage appelée "Bombe". Cette machine a été cruciale pour casser les codes Enigma et lire les messages allemands.</p>
+        <button id="btnPrev3">Précédent</button>
+        <button id="btnNext3">Suivant</button>
+    </section>
+    <section id="heritage">
+        <h2>Héritage et Impact</h2>
+        <img src="https://styles.redditmedia.com/t5_9d3huu/styles/communityIcon_s2fi2mtusbpb1.png" alt="Héritage et Impact de la Machine Enigma" style="max-width: 200px;">
+        <p>L'héritage de la machine Enigma et du travail d'Alan Turing est immense. Le décryptage des messages Enigma a été crucial pour la victoire des Alliés dans la Seconde Guerre mondiale. Il a également jeté les bases de la cryptographie moderne et de l'informatique.</p>
+        <button id="btnPrev4">Précédent</button>
+        <button id="btnNext4">Quiz</button>
+    </section>
+    <section id="quiz" style="display:none;">
+        <div class="quiz-container">
+            <h2>Quiz</h2>
+            <form id="quizForm">
+                <p>Quelle était la principale fonction de la machine Enigma ?</p>
+                <input type="radio" name="question1" value="a">a) Envoyer des messages<br>
+                <input type="radio" name="question1" value="b">b) Chiffrer et déchiffrer des messages<br>
+                <input type="radio" name="question1" value="c">c) Détecter les messages ennemis<br><br>
+
+                <p>Quel rôle a joué Alan Turing dans le décryptage des messages Enigma ?</p>
+                <input type="radio" name="question2" value="a">a) Il a conçu la machine Enigma<br>
+                <input type="radio" name="question2" value="b">b) Il a dirigé une équipe pour développer une machine de décryptage<br>
+                <input type="radio" name="question2" value="c">c) Il a intercepté les messages ennemis<br><br>
+
+                <input type="submit" value="Vérifier">
+            </form>
+            <button id="btnPrevQuiz">Retour</button>
+            <p id="quizResult"></p>
+        </div>
+    </section>
+
+    <!-- Script pour la navigation et le quiz -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            let currentSectionIndex = 0;
+            let visitedSections = new Array(sections.length).fill(false);
+
+            function showSection(index) {
+                sections.forEach((section, idx) => {
+                    if (idx === index) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+            }
+
+            function checkQuiz() {
+                const allVisited = visitedSections.every(visited => visited);
+                const quizResult = document.getElementById('quizResult');
+                if (allVisited) {
+                    quizResult.textContent = "Félicitations ! Vous avez lu toutes les sections.";
+                } else {
+                    quizResult.textContent = "Veuillez lire toutes les sections avant de passer au quiz.";
+                }
+            }
+
+            document.getElementById('btnNext1').addEventListener('click', function() {
+                visitedSections[currentSectionIndex] = true;
+                currentSectionIndex = 1;
+                showSection(currentSectionIndex);
+            });
+
+            document.getElementById('btnPrev2').addEventListener('click', function() {
+                visitedSections[currentSectionIndex] = true;
+                currentSectionIndex = 0;
+                showSection(currentSectionIndex);
+            });
+
+            document.getElementById('btnNext2').addEventListener('click', function() {
+                visitedSections[currentSectionIndex] = true;
+                currentSectionIndex = 2;
+                showSection(currentSectionIndex);
+            });
+
+            document.getElementById('btnPrev3').addEventListener('click', function() {
+                visitedSections[currentSectionIndex] = true;
+                currentSectionIndex = 1;
+                showSection(currentSectionIndex);
+            });
+
+            document.getElementById('btnNext3').addEventListener('click', function() {
+                visitedSections[currentSectionIndex] = true;
+                currentSectionIndex = 3;
+                showSection(currentSectionIndex);
+            });
+
+            document.getElementById('btnPrev4').addEventListener('click', function() {
+                visitedSections[currentSectionIndex] = true;
+                currentSectionIndex = 2;
+                showSection(currentSectionIndex);
+            });
+
+            document.getElementById('btnNext4').addEventListener('click', function() {
+                visitedSections[currentSectionIndex] = true;
+                currentSectionIndex = 4;
+                showSection(currentSectionIndex);
+                document.getElementById('quiz').style.display = 'block';
+            });
+
+            document.getElementById('btnPrevQuiz').addEventListener('click', function() {
+                currentSectionIndex = 3;
+                showSection(currentSectionIndex);
+                document.getElementById('quiz').style.display = 'none';
+            });
+
+            document.getElementById('quizForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const question1 = document.querySelector('input[name="question1"]:checked').value;
+                const question2 = document.querySelector('input[name="question2"]:checked').value;
+                if (question1 === 'b' && question2 === 'b') {
+                    document.getElementById('quizResult').textContent = "Félicitations ! Vous avez répondu correctement aux deux questions.";
+                } else {
+                    document.getElementById('quizResult').textContent = "Désolé, une ou plusieurs de vos réponses sont incorrectes.";
+                }
+                // Réinitialiser le formulaire
+                document.getElementById('quizForm').reset();
+            });	
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <button class="button"><a href="HTML.html" style="text-decoration: none; color: inherit;">page 1</a></button>
+    <button class="button"><a href="3ème page.html" style="text-decoration: none; color: inherit;">page 3</a></button>
+</body>
+</html>
+

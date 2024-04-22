@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation de la machine de Turing</title>
+    <style>
+        /* Ajout d'une animation de léger zoom sur l'image */
+        @keyframes zoom {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Ajout d'une animation de rotation de l'image */
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        img:hover {
+            animation: zoom 0.5s ease infinite, rotate 3s linear infinite;
+        }
+
+        /* Style pour le bouton caché */
+        #hiddenButton {
+            display: none;
+        }
+    </style>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f0f0;">
+    <header style="background-color: #4CAF50; color: #fff; text-align: center; padding: 20px 0; transition: background-color 0.3s ease;">
+        <h1 onmouseover="changeColor(this)" onmouseout="resetColor(this)">La Machine de Turing</h1>
+        <p>Un modèle théorique fondamental en informatique</p>
+    </header>
+    <div style="max-width: 800px; margin: 20px auto; padding: 0 20px;">
+        <img src="..." alt="Représentation de la machine de Turing" style="display: block; margin: 20px auto; max-width: 100%; height: auto; border: 5px solid #fff; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease-in-out;">
+        <h2>Introduction</h2>
+        <p>La machine de Turing est un modèle abstrait de dispositif informatique proposé par le mathématicien et informaticien Alan Turing dans les années 1930. Elle a révolutionné notre compréhension de ce qu'est un algorithme et a jeté les bases théoriques de l'informatique moderne.</p>
+        
+        <h2>Fonctionnement</h2>
+        <p>La machine de Turing manipule des symboles sur une bande de manière séquentielle, selon un ensemble de règles prédéfinies. Elle peut effectuer diverses opérations telles que la lecture, l'écriture et le déplacement sur la bande. Ce modèle abstrait a été crucial pour démontrer des concepts clés de calculabilité et de complexité algorithmique.</p>
+        
+        <h2>Applications</h2>
+        <p>La machine de Turing a eu un impact considérable dans de nombreux domaines, notamment en tant que fondement théorique pour la conception des ordinateurs modernes, la théorie de la complexité algorithmique et la logique mathématique.</p>
+    </div>
+    <div style="text-align: center; margin-top: 50px;">
+        <a href="HTML.html" style="display: inline-block; background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; margin: 0 10px; border-radius: 5px; transition: background-color 0.3s ease;">Page 1</a>
+        <a href="Boîte Enigma.html" style="display: inline-block; background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; margin: 0 10px; border-radius: 5px; transition: background-color 0.3s ease;">Page 2</a>
+        <br> <!-- Nouvelle ligne -->
+        <span id="hoverArea" onmouseover="revealButton()" onmouseout="hideButton()"> <!-- Zone de survol -->
+            .
+            <a id="hiddenButton" href="404.html" style="display: inline-block; background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; margin: 10px; border-radius: 5px; transition: background-color 0.3s ease;">...</a> <!-- Bouton caché -->
+        </span>
+    </div>
+    <script>
+        function changeColor(element) {
+            element.style.color = "#333";
+        }
+
+        function resetColor(element) {
+            element.style.color = "#fff";
+        }
+
+        // Fonction pour afficher le bouton caché
+        function revealButton() {
+            document.getElementById("hiddenButton").style.display = "inline-block";
+        }
+
+        // Fonction pour cacher le bouton
+        function hideButton() {
+            document.getElementById("hiddenButton").style.display = "none";
+        }
+    </script>
+</body>
+</html>
